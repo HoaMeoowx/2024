@@ -1,0 +1,18 @@
+spawn(function()
+    while true do
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+        if char and char:FindFirstChild("RaceTransformed") == nil then
+            -- Tìm nút kích hoạt tộc V3
+            local raceSkill = player.PlayerGui:FindFirstChild("RaceSkill")
+            if raceSkill and raceSkill:FindFirstChild("Circle") then
+                local cooldown = raceSkill.Circle:FindFirstChild("Cooldown")
+                if cooldown and tonumber(cooldown.Text) == 0 then
+                    -- Kích hoạt kỹ năng tộc V3
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Race", "Activate")
+                end
+            end
+        end
+        wait(0.1) -- Kiểm tra trạng thái mỗi 0.1 giây
+    end
+end)
